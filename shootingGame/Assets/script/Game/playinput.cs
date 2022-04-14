@@ -7,45 +7,42 @@ using UnityEngine.InputSystem;
 public class playinput : MonoBehaviour
 {
     private PlayerInput playerinput;
+    private PlayerInput.PlayerActions player;
+    private Vector2 Movement;
     private InputAction movement;
     private Rigidbody rb;
 
-    
+    public bool isGrounded;
+    public playermotot motot;
+    public PlayerLook look;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         playerinput = new PlayerInput();
-    }
-
-    private void OnEnable()
-    {
-        movement = playerinput.Player.Movement;
-        movement.Enable();
-
-        playerinput.Player.Jump.performed += DoJump;
-        playerinput.Player.Jump.Enable();
-
-    }
-
-    private void DoJump(InputAction.CallbackContext obj)
-    {
-        Debug.Log("Jump");
-        
-    }
-
-    private void OnDisable()
-    {
-        movement.Disable();
-        playerinput.Player.Jump.Disable();
+        player = playerinput.Player;
+        motot = GetComponent<playermotot>();
+        look = GetComponent<PlayerLook>();
+        player.Jump.performed += ctx => motot.Jump();
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("Movement values" + movement.ReadValue<Vector2>());
-
-
-        
-        
+        motot.ProcessMove(player.Movement.ReadValue<Vector2>());
     }
+    private void LateUpdate()
+    {
+        look.ProcessLook(player.Look.ReadValue<Vector2>());
+    }
+
+    private void OnEnable()
+    {
+        player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        player.Disable();
+    }
+
+   
 }
