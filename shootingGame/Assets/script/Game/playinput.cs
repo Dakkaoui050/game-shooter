@@ -10,9 +10,7 @@ public class playinput : MonoBehaviour
     private PlayerInput.PlayerActions player;
     private Vector2 Movement;
     private InputAction movement;
-    private Rigidbody rb;
-
-    public bool isGrounded;
+  
     public playermotot motot;
     public PlayerLook look;
 
@@ -23,11 +21,15 @@ public class playinput : MonoBehaviour
         motot = GetComponent<playermotot>();
         look = GetComponent<PlayerLook>();
         player.Jump.performed += ctx => motot.Jump();
+        player.Run.performed += ctx => motot.Running();
+        player.Crouch.performed += ctx => motot.Crouching();
     }
 
     private void FixedUpdate()
     {
         motot.ProcessMove(player.Movement.ReadValue<Vector2>());
+        
+
     }
     private void LateUpdate()
     {
