@@ -17,6 +17,7 @@ public class PlayerLook : MonoBehaviour
     }
     public void ProcessLook(Vector2 input)
     {
+        //this is for looking around with the mouse
         float mouseX = input.x;
         float mouseY = input.y;
 

@@ -7,6 +7,7 @@ public class playermotot : MonoBehaviour
 {
     private CharacterController Controller;
 
+    
     private Vector3 playerVelocity;
     private bool isGrounded;
 
@@ -52,24 +53,29 @@ public class playermotot : MonoBehaviour
     }
     public void ProcessMove(Vector2 input)
     {
+        
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
 
+        //character controller move Direction * with de speed
         Controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        //if your fall from a height 
         playerVelocity.y += gravity * Time.deltaTime;
+        //moving forward
         Controller.Move(playerVelocity * Time.deltaTime);
 
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
-        }
 
+        }
         
     }
 
     public void Jump()
     {
+        //jumping function 
         if (isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(JumpHeight * -3.0f * gravity);
@@ -85,12 +91,19 @@ public class playermotot : MonoBehaviour
     }
     public void Running()
     {
+        //run function
        sprinting = !sprinting;
         if (sprinting)
-            speed = 10f;
+        {
+           speed = 10f;
+           
+        }
         else
-            speed = 5f;
-        
+        {
+           speed = 5f;
+           
+        }
+            
     }
 
   
