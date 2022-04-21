@@ -87,3 +87,5 @@ shootingGame/Assets/character/animation character/Walk With Rifle.anim
 shootingGame/Assets/character/animation character/Walk With Rifle.anim.meta
 shootingGame/Assets/character/animation character/Ch15_nonPBR@Walking.fbx.meta
 shootingGame/Assets/character/animation character/Ch15_nonPBR@Rifle Idle.fbx
+shootingGame/Assets/character/animation character/Ch15_nonPBR@Crouch Walking.fbx
+shootingGame/Assets/character/animation character/Ch15_nonPBR@Idle Crouching.fbx
