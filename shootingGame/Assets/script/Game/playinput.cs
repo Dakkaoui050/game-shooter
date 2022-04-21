@@ -33,6 +33,9 @@ public class playinput : MonoBehaviour
        
         player.Movement.performed += ctx => animator.SetBool("isWalking", true);
         player.Movement.canceled += ctx => animator.SetBool("isWalking", false);
+
+        player.Crouch.performed += ctx => animator.SetBool("isCrouching", true);
+        player.Crouch.canceled += ctx => animator.SetBool("isCrouching", false);
     }
 
     private void FixedUpdate()
