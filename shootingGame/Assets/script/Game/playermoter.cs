@@ -22,7 +22,7 @@ public class playermoter : MonoBehaviour
     private bool sprinting;
 
     //private int BoostAmount = 10;
-    private bool Aim = false;
+    private bool Aim;
     public GameObject Cam;
     public GameObject aiming;
 
@@ -111,21 +111,22 @@ public class playermoter : MonoBehaviour
     }
     public void Aiming()
     {
-        Aim = aiming;
-        
-
-        if (Aim == true)
+        Aim = !Aim;
+        if(Aim)
         {
-             aiming.SetActive(true);
-             Cam.SetActive(false);
+            aiming.SetActive(true);
+            Cam.SetActive(false);
         }
         else
         {
-            aiming.SetActive(false);
-            Cam.SetActive(true);
-           
+            ResetCameras();
         }
 
 
+    }
+    public void ResetCameras()
+    {
+        Cam.SetActive(true);
+        aiming.SetActive(false);
     }
 }
