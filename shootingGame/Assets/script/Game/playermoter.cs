@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Cinemachine;
+using UnityEngine.EventSystems;
 
 public class playermoter : MonoBehaviour
 {
     private CharacterController Controller;
-    //private CinemachineVirtualCamera VirtualCamera;
+    
 
     private Vector3 playerVelocity;
     private bool isGrounded;
@@ -21,17 +21,20 @@ public class playermoter : MonoBehaviour
 
     private bool sprinting;
 
-    //private int BoostAmount = 10;
+    public int gunDamage;
+
     private bool Aim;
     public GameObject Cam;
     public GameObject aiming;
 
+    health health;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
         Controller = GetComponent<CharacterController>();
-
+        health = GetComponent<health>();
     }
 
     // Update is called once per frame
@@ -128,5 +131,26 @@ public class playermoter : MonoBehaviour
     {
         Cam.SetActive(true);
         aiming.SetActive(false);
+    }
+
+    public void Shoot()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward,out hit))
+        {
+            Debug.Log("Hit Something" + hit.transform.name);
+            health = hit.transform.GetComponent<health>();
+            if(health!= null)
+            {
+                health.Damage(gunDamage);
+            }
+        }
+
+        if (Physics.Raycast(aiming.transform.position, aiming.transform.forward, out hit))
+        {
+            Debug.Log("Hit Something wel aiming" + hit.transform.name);
+
+        }
+
     }
 }

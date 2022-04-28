@@ -25,7 +25,8 @@ public class input : MonoBehaviour
         Player.Jump.performed += ctx => motot.Jump();
         Player.Aim.performed += _ => motot.Aiming();
         Player.Aim.canceled += _ => motot.Aiming();
-        
+
+        Player.Fire.performed += _ => motot.Shoot();
 
         Player.Run.performed += ctx => motot.Running();
         Player.Crouch.performed += ctx => motot.Crouching();
