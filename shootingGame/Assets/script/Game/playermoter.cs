@@ -6,7 +6,10 @@ using UnityEngine.EventSystems;
 public class playermoter : MonoBehaviour
 {
     private CharacterController Controller;
-    
+
+    public float bulletSpeed = 10000;
+    public GameObject bulletprefab;
+    public GameObject barrel;
 
     private Vector3 playerVelocity;
     private bool isGrounded;
@@ -35,6 +38,7 @@ public class playermoter : MonoBehaviour
 
         Controller = GetComponent<CharacterController>();
         health = GetComponent<health>();
+        
     }
 
     // Update is called once per frame
@@ -114,6 +118,7 @@ public class playermoter : MonoBehaviour
     }
     public void Aiming()
     {
+        // switching from normal cam to Aim Cam and reversed
         Aim = !Aim;
         if(Aim)
         {
@@ -122,6 +127,7 @@ public class playermoter : MonoBehaviour
         }
         else
         {
+            //I do it this way because otherwise it won't work
             ResetCameras();
         }
 
@@ -138,7 +144,10 @@ public class playermoter : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Cam.transform.position, Cam.transform.forward,out hit))
         {
+            FireBullets();
+
             Debug.Log("Hit Something" + hit.transform.name);
+
             health = hit.transform.GetComponent<health>();
             if(health!= null)
             {
@@ -150,7 +159,32 @@ public class playermoter : MonoBehaviour
         {
             Debug.Log("Hit Something wel aiming" + hit.transform.name);
 
+            health = hit.transform.GetComponent<health>();
+            if (health != null)
+            {
+                health.Damage(gunDamage);
+            }
         }
 
     }
+    public void FireBullets()
+    {
+        //The Bullet instantiation happens here.
+        GameObject BulletHandler;
+        BulletHandler = Instantiate(bulletprefab, barrel.transform.position,barrel.transform.rotation) as GameObject;
+      
+        //This is EASILY corrected here you might have to rotate it from a different axis and or angle based on your particular mesh.
+        BulletHandler.transform.Rotate(Vector3.left * 90);
+
+        Rigidbody RigidBody;
+        RigidBody = BulletHandler.GetComponent<Rigidbody>();
+        
+        //Tell the bullet to be push forward 
+        RigidBody.AddForce(transform.forward * bulletSpeed);
+
+        //if the bullet is released in 5 sec is the bullet destroy
+        Destroy(BulletHandler, 5.0f);
+
+    }
+
 }
