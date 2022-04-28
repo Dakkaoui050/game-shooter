@@ -10,6 +10,7 @@ public class playermoter : MonoBehaviour
     public float bulletSpeed = 10000;
     public GameObject bulletprefab;
     public GameObject barrel;
+   
 
     private Vector3 playerVelocity;
     private bool isGrounded;
@@ -141,6 +142,8 @@ public class playermoter : MonoBehaviour
 
     public void Shoot()
     {
+       
+
         RaycastHit hit;
         if (Physics.Raycast(Cam.transform.position, Cam.transform.forward,out hit))
         {
@@ -157,6 +160,8 @@ public class playermoter : MonoBehaviour
 
         if (Physics.Raycast(aiming.transform.position, aiming.transform.forward, out hit))
         {
+            FireBullets();
+
             Debug.Log("Hit Something wel aiming" + hit.transform.name);
 
             health = hit.transform.GetComponent<health>();
@@ -171,10 +176,10 @@ public class playermoter : MonoBehaviour
     {
         //The Bullet instantiation happens here.
         GameObject BulletHandler;
-        BulletHandler = Instantiate(bulletprefab, barrel.transform.position,barrel.transform.rotation) as GameObject;
+        BulletHandler = Instantiate(bulletprefab, barrel.transform.position,barrel.transform.rotation);
       
         //This is EASILY corrected here you might have to rotate it from a different axis and or angle based on your particular mesh.
-        BulletHandler.transform.Rotate(Vector3.left * 90);
+        BulletHandler.transform.Rotate(Vector3.zero * 90);
 
         Rigidbody RigidBody;
         RigidBody = BulletHandler.GetComponent<Rigidbody>();
