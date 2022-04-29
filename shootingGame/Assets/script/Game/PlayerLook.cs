@@ -14,7 +14,7 @@ public class PlayerLook : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = false;
+       // Cursor.visible = false;
     }
     public void ProcessLook(Vector2 input)
     {

@@ -7,9 +7,7 @@ public class playermoter : MonoBehaviour
 {
     private CharacterController Controller;
 
-    public float bulletSpeed = 10000;
-    public GameObject bulletprefab;
-    public GameObject barrel;
+    public ParticleSystem muzzels;
    
 
     private Vector3 playerVelocity;
@@ -145,14 +143,14 @@ public class playermoter : MonoBehaviour
        
 
         RaycastHit hit;
-        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward,out hit))
+        if (Physics.Raycast(Cam.transform.position,Cam.transform.forward,out hit))
         {
-            FireBullets();
+             muzzels.Play();
 
             Debug.Log("Hit Something" + hit.transform.name);
 
             health = hit.transform.GetComponent<health>();
-            if(health!= null)
+            if(health != null)
             {
                 health.Damage(gunDamage);
             }
@@ -160,8 +158,8 @@ public class playermoter : MonoBehaviour
 
         if (Physics.Raycast(aiming.transform.position, aiming.transform.forward, out hit))
         {
-            FireBullets();
-
+            //Bullet();
+            muzzels.Play();
             Debug.Log("Hit Something wel aiming" + hit.transform.name);
 
             health = hit.transform.GetComponent<health>();
@@ -171,25 +169,8 @@ public class playermoter : MonoBehaviour
             }
         }
 
-    }
-    public void FireBullets()
-    {
-        //The Bullet instantiation happens here.
-        GameObject BulletHandler;
-        BulletHandler = Instantiate(bulletprefab, barrel.transform.position,barrel.transform.rotation);
-      
-        //This is EASILY corrected here you might have to rotate it from a different axis and or angle based on your particular mesh.
-        BulletHandler.transform.Rotate(Vector3.zero * 90);
-
-        Rigidbody RigidBody;
-        RigidBody = BulletHandler.GetComponent<Rigidbody>();
-        
-        //Tell the bullet to be push forward 
-        RigidBody.AddForce(transform.forward * bulletSpeed);
-
-        //if the bullet is released in 5 sec is the bullet destroy
-        Destroy(BulletHandler, 5.0f);
-
+       
     }
 
+   
 }
