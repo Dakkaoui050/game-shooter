@@ -8,7 +8,8 @@ public class playermoter : MonoBehaviour
     private CharacterController Controller;
 
     public ParticleSystem muzzels;
-   
+    public GameObject impEffect;
+
 
     private Vector3 playerVelocity;
     private bool isGrounded;
@@ -168,8 +169,8 @@ public class playermoter : MonoBehaviour
                 health.Damage(gunDamage);
             }
         }
-
-       
+        GameObject effect = Instantiate(impEffect,hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
+        Destroy(effect, 0.5f);
     }
 
    
