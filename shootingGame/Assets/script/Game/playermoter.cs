@@ -10,7 +10,6 @@ public class playermoter : MonoBehaviour
     public ParticleSystem muzzels;
     public GameObject impEffect;
 
-
     private Vector3 playerVelocity;
     private bool isGrounded;
 
@@ -146,29 +145,35 @@ public class playermoter : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Cam.transform.position,Cam.transform.forward,out hit))
         {
+            
+            //particle
              muzzels.Play();
 
             Debug.Log("Hit Something" + hit.transform.name);
 
             health = hit.transform.GetComponent<health>();
             if(health != null)
-            {
+            {   //death
                 health.Damage(gunDamage);
             }
         }
 
         if (Physics.Raycast(aiming.transform.position, aiming.transform.forward, out hit))
         {
-            //Bullet();
+            
+
+            //particle
             muzzels.Play();
             Debug.Log("Hit Something wel aiming" + hit.transform.name);
 
             health = hit.transform.GetComponent<health>();
             if (health != null)
             {
+                //death
                 health.Damage(gunDamage);
             }
         }
+        //the bullet effect
         GameObject effect = Instantiate(impEffect,hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
         Destroy(effect, 0.5f);
     }
