@@ -73,6 +73,22 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""switchWeapon1"",
+                    ""type"": ""Button"",
+                    ""id"": ""7230ff46-105a-489d-b0ed-c9622cc5830a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""switchWeapon2"",
+                    ""type"": ""Button"",
+                    ""id"": ""efbcf475-a0ed-4f81-8154-805627f0f50c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -273,6 +289,28 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85b27dcb-ae42-40fd-9a30-ba6f0063c336"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""switchWeapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22514792-d228-4c96-b1c2-93e593805bd5"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""switchWeapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,6 +326,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_switchWeapon1 = m_Player.FindAction("switchWeapon1", throwIfNotFound: true);
+        m_Player_switchWeapon2 = m_Player.FindAction("switchWeapon2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -344,6 +384,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_switchWeapon1;
+    private readonly InputAction m_Player_switchWeapon2;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -355,6 +397,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @switchWeapon1 => m_Wrapper.m_Player_switchWeapon1;
+        public InputAction @switchWeapon2 => m_Wrapper.m_Player_switchWeapon2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -385,6 +429,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @switchWeapon1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchWeapon1;
+                @switchWeapon1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchWeapon1;
+                @switchWeapon1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchWeapon1;
+                @switchWeapon2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchWeapon2;
+                @switchWeapon2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchWeapon2;
+                @switchWeapon2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchWeapon2;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -410,6 +460,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @switchWeapon1.started += instance.OnSwitchWeapon1;
+                @switchWeapon1.performed += instance.OnSwitchWeapon1;
+                @switchWeapon1.canceled += instance.OnSwitchWeapon1;
+                @switchWeapon2.started += instance.OnSwitchWeapon2;
+                @switchWeapon2.performed += instance.OnSwitchWeapon2;
+                @switchWeapon2.canceled += instance.OnSwitchWeapon2;
             }
         }
     }
@@ -423,5 +479,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnSwitchWeapon1(InputAction.CallbackContext context);
+        void OnSwitchWeapon2(InputAction.CallbackContext context);
     }
 }

@@ -13,7 +13,7 @@ public class input : MonoBehaviour
 
     private playermoter motot;
     private PlayerLook look;
-    
+    gun gun;
 
     private void Awake()
     {
@@ -22,15 +22,19 @@ public class input : MonoBehaviour
         Player = playerinput.Player;
         motot = GetComponent<playermoter>();
         look = GetComponent<PlayerLook>();
+        gun = GetComponent<gun>();
+
         Player.Jump.performed += ctx => motot.Jump();
         Player.Aim.performed += _ => motot.Aiming();
         Player.Aim.canceled += _ => motot.Aiming();
 
-        Player.Fire.performed += _ => motot.Shoot();
+        Player.Fire.performed += _ => gun.Shoot();
 
         Player.Run.performed += ctx => motot.Running();
         Player.Crouch.performed += ctx => motot.Crouching();
 
+        Player.switchWeapon1.performed += _ => gun.switchToMain();
+        Player.switchWeapon2.performed += _ => gun.switchToSecode();
     }
 
     private void FixedUpdate()
