@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class health : MonoBehaviour
 {   //health
-    public float Health;  
+    public float Health;
     public float MaxHealth;
 
     //range of damage. (I chance this later voor each weapon)
     public int minDmg = 1;
     public int maxDmg = 10;
 
-
+    //healthbar
     public GameObject HealthBar;
     public Slider Slider;
+
+    public TextMeshProUGUI healthText;
 
     public void Damage(int amount)
     {
         Health -= Random.Range(minDmg, maxDmg);
 
         Health -= amount;
-        if(Health <= 0)
+        if (Health <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -45,7 +48,9 @@ public class health : MonoBehaviour
 
             Destroy(gameObject);
 
-        }
+        } 
+        healthText.text = Health.ToString() + " / " + MaxHealth.ToString();
+
     }
 
     float CalculateHealth()
@@ -53,11 +58,7 @@ public class health : MonoBehaviour
         return Health / MaxHealth;
     }
 
+   
 
-    
-
-
-
-
-
+ 
 }
