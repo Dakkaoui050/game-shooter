@@ -49,6 +49,7 @@ public class health : MonoBehaviour
             Destroy(gameObject);
 
         } 
+
         healthText.text = Health.ToString() + " / " + MaxHealth.ToString();
 
     }
