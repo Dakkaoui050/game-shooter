@@ -1,66 +1,67 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class gun : MonoBehaviour
-{
+{   
+    //effect 
     public ParticleSystem muzzels;
     public GameObject impEffect;
 
+    // Damage
     public int gunDamage;
 
-    public GameObject MainWeapon;
-    public GameObject SecWeapon;
-    public GameObject threeWeapon;
-    public GameObject MeleeWeapon;
+    // Ammo
+    public int MaxAmmo = 20;
+    private int CurrentAmmo;
+    public float ReloadTime = 2f;
+    public bool isReloading = false;
 
+    // the cameras 
     public GameObject Cam;
     public GameObject aiming;
 
+    //scripts
     health health;
 
 
     private void Start()
     {
         health = GetComponent<health>();
+
+        CurrentAmmo = MaxAmmo;
     }
-    public void switchToMain()
+    private void OnEnable()
     {
-        Debug.Log("main weapon selected");
-        MainWeapon.SetActive(true);
-        SecWeapon.SetActive(false);
-        threeWeapon.SetActive(false);
-        MeleeWeapon.SetActive(false);
+        isReloading = false;
+    }
+    private void Update()
+    {
+        if (isReloading)
+        {
+            return;
+        }
+        if (CurrentAmmo <= 0)
+        {
+
+            StartCoroutine(Reload());
+            return;
+        }
     }
 
-    public void switchToSecode()
-    { 
-        Debug.Log("2e weapon selected");
-        SecWeapon.SetActive(true);
-        MainWeapon.SetActive(false);
-        threeWeapon.SetActive(false);
-        MeleeWeapon.SetActive(false);
-    }
-    public void SwitchToThree()
+    IEnumerator Reload()
     {
-        Debug.Log(" 3e weapon selected");
-        threeWeapon.SetActive(true);
-        SecWeapon.SetActive(false);
-        MainWeapon.SetActive(false);
-        MeleeWeapon.SetActive(false);
-    }
-    public void SwitchToMelee()
-    {
-        Debug.Log(" melee weapon selected");
-        threeWeapon.SetActive(false);
-        SecWeapon.SetActive(false);
-        MainWeapon.SetActive(false);
-        MeleeWeapon.SetActive(true);
+        isReloading = true;
+        yield return new WaitForSeconds(ReloadTime);
 
+        CurrentAmmo = MaxAmmo;
+        isReloading = false;
     }
+
     public void Shoot()
     {
-
+        CurrentAmmo--;
 
         RaycastHit hit;
         if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit))

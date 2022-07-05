@@ -24785,6 +24785,7 @@ GameObject:
   - component: {fileID: 1316780644}
   - component: {fileID: 1316780638}
   - component: {fileID: 1316780645}
+  - component: {fileID: 1316780646}
   m_Layer: 0
   m_Name: test player
   m_TagString: Player
@@ -24835,10 +24836,9 @@ MonoBehaviour:
   muzzels: {fileID: 2106398442}
   impEffect: {fileID: 100006, guid: 0438351a6e6422d43a09930e9be00ee9, type: 3}
   gunDamage: 40
-  MainWeapon: {fileID: 1092768254}
-  SecWeapon: {fileID: 576272258}
-  threeWeapon: {fileID: 1701672719}
-  MeleeWeapon: {fileID: 1590394918}
+  MaxAmmo: 20
+  ReloadTime: 2
+  isReloading: 0
   Cam: {fileID: 292335630}
   aiming: {fileID: 1519579629}
 --- !u!114 &1316780639
@@ -24980,6 +24980,22 @@ MonoBehaviour:
   HealthBar: {fileID: 1715091181}
   Slider: {fileID: 375493545}
   healthText: {fileID: 1197485804}
+--- !u!114 &1316780646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316780635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8739987b2616a3047a06bd493ae62d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainWeapon: {fileID: 1092768254}
+  SecWeapon: {fileID: 576272258}
+  threeWeapon: {fileID: 1701672719}
+  MeleeWeapon: {fileID: 1590394918}
 --- !u!1 &1369167284
 GameObject:
   m_ObjectHideFlags: 0

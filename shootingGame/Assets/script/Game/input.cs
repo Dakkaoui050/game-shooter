@@ -14,6 +14,7 @@ public class input : MonoBehaviour
     private playermoter motot;
     private PlayerLook look;
     gun gun;
+    Selectbar Selectbar;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class input : MonoBehaviour
         look = GetComponent<PlayerLook>();
         gun = GetComponent<gun>();
 
+        Selectbar = GetComponent<Selectbar>(); 
+
         Player.Jump.performed += ctx => motot.Jump();
         Player.Aim.performed += _ => motot.Aiming();
         Player.Aim.canceled += _ => motot.Aiming();
@@ -33,10 +36,10 @@ public class input : MonoBehaviour
         Player.Run.performed += ctx => motot.Running();
         Player.Crouch.performed += ctx => motot.Crouching();
 
-        Player.switchWeapon1.performed += _ => gun.switchToMain();
-        Player.switchWeapon2.performed += _ => gun.switchToSecode();
-        Player.switchWeapon3.performed += _ => gun.SwitchToThree();
-        Player.switchWeapon4.performed += _ => gun.SwitchToMelee();
+        Player.switchWeapon1.performed += _ => Selectbar.switchToMain();
+        Player.switchWeapon2.performed += _ => Selectbar.switchToSecode();
+        Player.switchWeapon3.performed += _ => Selectbar.SwitchToThree();
+        Player.switchWeapon4.performed += _ => Selectbar.SwitchToMelee();
     }
 
     private void FixedUpdate()
