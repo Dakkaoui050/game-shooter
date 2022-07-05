@@ -35,6 +35,8 @@ public class input : MonoBehaviour
 
         Player.switchWeapon1.performed += _ => gun.switchToMain();
         Player.switchWeapon2.performed += _ => gun.switchToSecode();
+        Player.switchWeapon3.performed += _ => gun.SwitchToThree();
+        Player.switchWeapon4.performed += _ => gun.SwitchToMelee();
     }
 
     private void FixedUpdate()

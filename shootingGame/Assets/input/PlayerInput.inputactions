@@ -76,6 +76,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "switchWeapon3",
+                    "type": "Button",
+                    "id": "ae8a2114-72a6-430e-8377-a789a0bec9c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "switchWeapon4",
+                    "type": "Button",
+                    "id": "33fd82ce-a438-4035-9e26-ecfdd1a693e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -296,6 +312,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "switchWeapon2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f72225a-8f46-4490-a321-ad7058727ed1",
+                    "path": "<Keyboard>/3",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "switchWeapon3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98e7e4dd-7266-4063-a665-1c5f21fd8033",
+                    "path": "<Keyboard>/4",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "switchWeapon4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
