@@ -18,7 +18,7 @@ public class health : MonoBehaviour
     public Slider Slider;
 
     public TextMeshProUGUI healthText;
-
+    SpawnPoint s;
     public void Damage(int amount)
     {
         Health -= Random.Range(minDmg, maxDmg);
@@ -26,13 +26,15 @@ public class health : MonoBehaviour
         Health -= amount;
         if (Health <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            s.Update();
         }
     }
 
 
     public void Start()
     {
+        s = GetComponent<SpawnPoint>();
         Health = MaxHealth;
         Slider.value = CalculateHealth();
         //scoreText.text = "Points: " + 1;
@@ -47,7 +49,7 @@ public class health : MonoBehaviour
         {
 
             Destroy(gameObject);
-
+            s.Update();
         } 
 
         healthText.text = Health.ToString() + " / " + MaxHealth.ToString();
