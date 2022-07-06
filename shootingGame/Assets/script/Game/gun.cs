@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class gun : MonoBehaviour
 {   
@@ -17,6 +19,7 @@ public class gun : MonoBehaviour
     private int CurrentAmmo;
     public float ReloadTime = 2f;
     public bool isReloading = false;
+    public TextMeshProUGUI Ammo;
 
     // the cameras 
     public GameObject Cam;
@@ -36,7 +39,7 @@ public class gun : MonoBehaviour
     {
         isReloading = false;
     }
-    private void Update()
+    public void Update()
     {
         if (isReloading)
         {
@@ -48,6 +51,8 @@ public class gun : MonoBehaviour
             StartCoroutine(Reload());
             return;
         }
+
+        Ammo.text = CurrentAmmo.ToString() + " / " + MaxAmmo.ToString();
     }
 
     IEnumerator Reload()
