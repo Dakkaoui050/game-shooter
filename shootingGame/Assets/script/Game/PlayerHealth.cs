@@ -8,14 +8,12 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public float MaxHealth;
 
-    public GameObject HealthBar;
-    public Slider Slider;
+    public GameObject enemy;
 
     public void Start()
     {
         health = MaxHealth;
-        Slider.value = CalculateHealth();
-        //scoreText.text = "Points: " + 1;
+      
     }
 
     public void TakeDamage(float damage)
@@ -26,11 +24,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void Update()
     {
-        Slider.value = CalculateHealth();
+        
 
         if (health <= 0)
         {
-
+           
             Destroy(gameObject);
 
         }

@@ -26,8 +26,8 @@ public class health : MonoBehaviour
         Health -= amount;
         if (Health <= 0)
         {
-            Destroy(gameObject);
-            s.Update();
+           // Destroy(gameObject);
+            s.respawn();
         }
     }
 
@@ -48,8 +48,8 @@ public class health : MonoBehaviour
         if (Health <= 0)
         {
 
-            Destroy(gameObject);
-            s.Update();
+            //Destroy(gameObject);
+            s.respawn();
         } 
 
         healthText.text = Health.ToString() + " / " + MaxHealth.ToString();

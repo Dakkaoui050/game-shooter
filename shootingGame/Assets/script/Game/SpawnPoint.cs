@@ -4,31 +4,33 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    public GameObject[] spawnLocation;
     public GameObject player;
+
+    private Vector3 RespawnLocation;
     health h;
-    private float deathcounter = 3f;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         h = GetComponent<health>();
-    
-         Instantiate(player, transform.position, transform.rotation);
+        spawnLocation = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
-
-    // Update is called once per frame
-    public void Update()
-    { 
-       
-
-        if (h.Health == 0)
-        {
-            StartCoroutine(restart());
-           Instantiate(player, transform.position, transform.rotation);
-        }
-    }
-    IEnumerator restart()
+    private void Start()
     {
-        yield return new WaitForSeconds(deathcounter); 
-        
+        RespawnLocation = player.transform.position;
+
+        SpawnPlayer();
+    }
+
+   private void SpawnPlayer()
+    {
+        int spawn = Random.Range(0, spawnLocation.Length);
+        GameObject.Instantiate(player, spawnLocation[spawn].transform.position, Quaternion.identity);
+
+    }
+    public void respawn()
+    {
+            Debug.Log("respawn compleet");
+            int spawn = Random.Range(0, spawnLocation.Length);
+            GameObject.Instantiate(player, spawnLocation[spawn].transform.position, Quaternion.identity);
     }
 }
